@@ -32,7 +32,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ disableEveryone: true });
 
 const permission = require("command-permission");
-permission(client, {
+permission.command(client, {
     botOwner: ["botOwnerID"], //id владельца бота
     commands: "commands", //название папки с сомандами
     botPrefix: ["!", "*", ">"], //масив префиксов
