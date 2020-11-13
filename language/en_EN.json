@@ -1,0 +1,14 @@
+{
+    "messageMemberPerm": "> You do not have sufficient rights to execute the command: ```{{command.memberPerm}}```",
+    "messageClientPerm": "> I do not have sufficient rights to execute the command: ```{{command.clientPerm}}```",
+
+    "indexCommandPrefix": "Prefix",
+    "indexGetAllFooter": "To see the description of commands and type of use: help [комманда]",
+    "indexGetAllReply": "The command menu has been sent to you in PM",
+    "indexGetCMDInfo": "Command information ** {{input.toLowerCase ()}} ** not found.",
+    "indexGetCMDName": "**Command name**",
+    "indexGetCMDAliases": "**Aliases**",
+    "indexGetCMDDescription": "**Description**",
+    "indexGetCMDUsage": "**Using**",
+    "indexGetCMDFooter": "Syntax: <> = required, [] = optional"
+}

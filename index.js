@@ -1,6 +1,7 @@
 const { MessageEmbed, Collection } = require("discord.js");
 const fs = require("fs");
-const { messages } = require("command-permission/lib/messages");
+const { messages } = require("./lib/messages");
+let languages;
 
 exports.command = function(client, options) {
     try {
@@ -9,15 +10,22 @@ exports.command = function(client, options) {
         let botOwner = options.botOwner || [];
         let commandHelp = options.commandHelp || true;
         let commandPrefix = options.commandPrefix || true;
+        let language = options.language || "ru_RU";
+
+        if (!require(`./language/${language}`)) {
+            language = "ru_RU";
+        };
 
         options = {
             botOwner: botOwner,
             commands: commands,
             botPrefix: botPrefix,
             help: commandHelp,
-            prefix: commandPrefix
+            prefix: commandPrefix,
+            language: language
         };
 
+        languages = require(`./language/${options.language}`);
         client.commands = new Collection();
         client.aliases = new Collection();
         client.categories = fs.readdirSync("./commands/");
@@ -47,15 +55,15 @@ exports.command = function(client, options) {
                         return getAll(client, message);
                     };
                 } catch (error) {
-                    console.log(`ERRER: Ошибка комманды help, установите options.help: false`);
+                    console.log(error);
                 };
             };
 
             if (cmd == "prefix" && commandPrefix == true) {
                 try {
-                    message.channel.send(`Префикс: **${options.botPrefix.join("**, **")}**`);
+                    message.channel.send(`${languages.indexCommandPrefix}: **${options.botPrefix.join("**, **")}**`);
                 } catch (error) {
-                    console.log(`ERRER: Ошибка комманды prefix, установите options.prefix: false`);
+                    console.log(error);
                 };
             };
 
@@ -66,16 +74,25 @@ exports.command = function(client, options) {
 
         return client;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     };
 };
+
+exports.cleanError = (error) => {
+    try {
+        if (typeof(error) === "string")
+            return error.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+        else
+            return error;
+    } catch (e) { console.log(e) }
+}
 
 function getAll(client, message) {
     try {
         const embed = new MessageEmbed();
         embed.setColor("RANDOM");
-        embed.setTitle(`**${message.guild.name}** Меню help`);
-        embed.setFooter(`Чтобы увидеть описание команд и тип использования help [Name]`);
+        embed.setTitle(`Menu help: **${message.guild.name}**`);
+        embed.setFooter(languages.indexGetAllFooter);
 
         const commands = (category) => {
             return client.commands
@@ -89,11 +106,11 @@ function getAll(client, message) {
             .reduce((string, category) => string + "\n" + category);
 
         embed.setDescription(info);
-        message.reply('Меню комманд отправленно вам в DM');
+        message.reply(languages.indexGetAllReply);
         message.author.send({ embed });
         delete embed;
     } catch (error) {
-        console.log(`ERRER: Ошибка комманды help, установите options.help: false`);
+        console.log(error);
     };
 };
 
@@ -101,7 +118,7 @@ function getCMD(client, message, input) {
     try {
         const embed = new MessageEmbed();
         const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
-        let info = `Информации о команде **${input.toLowerCase()}** не найдено.`;
+        let info = languages.indexGetCMDInfo.replace(/{{input.toLowerCase()}}/g, input.toLowerCase());
 
         if (!cmd) {
             embed.setColor("RED");
@@ -110,12 +127,12 @@ function getCMD(client, message, input) {
             return delete embed;
         };
 
-        if (cmd.name) info = `**Название команды**: ${cmd.name}`;
-        if (cmd.aliases) info += `\n**Алиасы**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
-    if (cmd.description) info += `\n**Описание**: ${cmd.description}`;
+        if (cmd.name) info = `${languages.indexGetCMDName}: ${cmd.name}`;
+        if (cmd.aliases) info += `\n${languages.indexGetCMDAliases}: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
+    if (cmd.description) info += `\n${languages.indexGetCMDDescription}: ${cmd.description}`;
     if (cmd.usage) {
-        info += `\n**Использование**: ${cmd.usage}`;
-        embed.setFooter(`Синтаксис: <> = обязательно, [] = необязательно`);
+        info += `\n${languages.indexGetCMDUsage}: ${cmd.usage}`;
+        embed.setFooter(languages.indexGetCMDFooter);
     };
 
     embed.setColor("GREEN");
@@ -123,6 +140,6 @@ function getCMD(client, message, input) {
     message.channel.send({embed});
     delete embed;
     } catch (error) {
-        console.log(`ERRER: Ошибка комманды prefix, установите options.prefix: false`);
+        console.log(error);
     };
 };
