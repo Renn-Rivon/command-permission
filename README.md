@@ -2,7 +2,7 @@
 
 [![Discord server](https://img.shields.io/discord/528690317679919116?color=7289da&logo=discord&logoColor=white)](https://discord.gg/8NGtwN9) ![GitHub package.json version](https://img.shields.io/github/package-json/v/Renn-Rivon/command-permission) ![GitHub package.json version](https://img.shields.io/node/v/command-permission)
 
-[Русский README](https://github.com/Renn-Rivon/command-permission/blob/main/README.md)
+[Русский README](https://github.com/Renn-Rivon/command-permission/blob/main/README_RU.md)
 
 ### Installation
 
