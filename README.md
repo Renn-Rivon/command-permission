@@ -51,7 +51,7 @@ module.exports = {
     name: "test", //command name
     aliases: [], //aliases
     category: "info", //the category in which the command file is located
-    description: "Показать аватарку (свою/пользователя)", //description
+    description: "Show avatar (your / user)", //description
     usage: "avatar [user]", //example of use
     clientPerm: ['ATTACH_FILES'], //list of bot rights for successful command execution
     memberPerm: [], //list of user rights for successful command execution
