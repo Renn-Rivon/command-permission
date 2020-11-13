@@ -1,6 +1,6 @@
 {
     "name": "command-permission",
-    "version": "0.0.5",
+    "version": "0.1.0",
     "description": "Easy to use discord bot rights checker",
     "main": "index.js",
     "repository": {
