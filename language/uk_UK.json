@@ -1,0 +1,14 @@
+{
+    "messageMemberPerm": "> У вас недостатньо прав для виконання цієї команди: ```{{command.memberPerm}}```",
+    "messageClientPerm": "> У мене недостатньо прав для виконання цієї команди: ```{{command.clientPerm}}```",
+
+    "indexCommandPrefix": "Префікс",
+    "indexGetAllFooter": "Щоб побачити опис команд і тип використання: help [комманда]",
+    "indexGetAllReply": "Список команд відправлено вам у ПП",
+    "indexGetCMDInfo": "Інформації про команду **{{input.toLowerCase()}}** не найдено.",
+    "indexGetCMDName": "**Назва команди**",
+    "indexGetCMDAliases": "**Аліаси**",
+    "indexGetCMDDescription": "**Опис**",
+    "indexGetCMDUsage": "**Використання**",
+    "indexGetCMDFooter": "Синтаксис: <> = обов'язково, [] = не обов'язково"
+}

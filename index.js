@@ -5,24 +5,17 @@ let languages;
 
 exports.command = function(client, options) {
     try {
-        let botPrefix = options.botPrefix || ["!!"];
-        let commands = options.commands || "commands";
-        let botOwner = options.botOwner || [];
-        let commandHelp = options.commandHelp || true;
-        let commandPrefix = options.commandPrefix || true;
-        let language = options.language || "ru_RU";
-
-        if (!require(`./language/${language}`)) {
-            language = "ru_RU";
-        };
+        if (!moduleAvailable(`./language/${options.language}`)) console.log(`[Language Error] ${options.language} not found, ru_RU will be used by default.`);
 
         options = {
-            botOwner: botOwner,
-            commands: commands,
-            botPrefix: botPrefix,
-            help: commandHelp,
-            prefix: commandPrefix,
-            language: language
+            botOwner: options.botOwner || [],
+            commands: options.commands || "commands",
+            botPrefix: options.botPrefix || ["!!"],
+            commandDM: options.commandDM ? true : false,
+            help: options.commandHelp ? true : false,
+            helpDM: options.commandHelpDM ? true : false,
+            prefix: options.commandPrefix ? true : false,
+            language: moduleAvailable(`./language/${options.language}`) ? options.language : "ru_RU"
         };
 
         languages = require(`./language/${options.language}`);
@@ -33,13 +26,13 @@ exports.command = function(client, options) {
 
         client.on("message", async message => {
             let prefix = false;
-            for (const thisPrefix of botPrefix) {
+            for (const thisPrefix of options.botPrefix) {
                 if (message.content.startsWith(thisPrefix)) prefix = thisPrefix;
             };
 
-            if (message.channel.type === "dm" || message.author.bot || message.author === client.user) return;
+            if ((message.channel.type === "dm" && options.commandDM == false) || message.author.bot || message.author === client.user) return;
             if (!message.content.startsWith(prefix)) return;
-            if (!message.member) message.member = await message.guild.fetchMember(message);
+            if (!message.member) message.guild ? message.member = await message.guild.fetchMember(message) : message.author;
 
             content = message.content.toLowerCase();
             const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -47,19 +40,19 @@ exports.command = function(client, options) {
 
             if (cmd.length === 0) return;
 
-            if (cmd == "help" && commandHelp == true) {
+            if (cmd == "help" && options.help == true) {
                 try {
                     if (args[0]) {
                         return getCMD(client, message, args[0]);
                     } else {
-                        return getAll(client, message);
+                        return getAll(client, message, options);
                     };
                 } catch (error) {
                     console.log(error);
                 };
             };
 
-            if (cmd == "prefix" && commandPrefix == true) {
+            if (cmd == "prefix" && options.prefix == true) {
                 try {
                     message.channel.send(`${languages.indexCommandPrefix}: **${options.botPrefix.join("**, **")}**`);
                 } catch (error) {
@@ -87,11 +80,19 @@ exports.cleanError = (error) => {
     } catch (e) { console.log(e) }
 }
 
-function getAll(client, message) {
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch (e) {}
+    return false;
+};
+
+function getAll(client, message, options) {
     try {
         const embed = new MessageEmbed();
         embed.setColor("RANDOM");
-        embed.setTitle(`Menu help: **${message.guild.name}**`);
+        embed.setTitle(`Menu help: **${message.guild ? message.guild.name : "📑"}**`);
         embed.setFooter(languages.indexGetAllFooter);
 
         const commands = (category) => {
@@ -100,14 +101,17 @@ function getAll(client, message) {
                 .map(cmd => `\`${cmd.name}\``)
                 .join(", ");
         };
-
         const info = client.categories
             .map(cat => `**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
             .reduce((string, category) => string + "\n" + category);
 
         embed.setDescription(info);
-        message.reply(languages.indexGetAllReply);
-        message.author.send({ embed });
+        if (options.helpDM) {
+            message.reply(languages.indexGetAllReply);
+            message.author.send({ embed });
+        } else {
+            message.channel.send({ embed });
+        };
         delete embed;
     } catch (error) {
         console.log(error);

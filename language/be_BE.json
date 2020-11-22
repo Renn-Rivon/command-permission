@@ -1,0 +1,14 @@
+{
+    "messageMemberPerm": "> У вас недастаткова правоў для выканання каманды: ```{{command.memberPerm}}```",
+    "messageClientPerm": "> У мяне недастаткова правоў для выканання каманды: ```{{command.clientPerm}}```",
+
+    "indexCommandPrefix": "Прэфікс",
+    "indexGetAllFooter": "Каб убачыць апісанне каманд і тып выкарыстання: help [каманда]",
+    "indexGetAllReply": "Меню каманд адпраўлена вам у ЛС",
+    "indexGetCMDInfo": "Інфармацыі аб камандзе **{{input.toLowerCase()}}** не знойдзено.",
+    "indexGetCMDName": "**Назва каманды**",
+    "indexGetCMDAliases": "**Алиасы**",
+    "indexGetCMDDescription": "**Апісанне**",
+    "indexGetCMDUsage": "**Выкарыстанне**",
+    "indexGetCMDFooter": "Сінтаксіс: <> = абавязкова, [] = не абавязкова"
+}

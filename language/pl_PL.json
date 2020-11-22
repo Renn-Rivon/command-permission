@@ -1,0 +1,14 @@
+{
+    "messageMemberPerm": "> Nie masz wystarczających uprawnień do wykonania polecenia: ```{{command.memberPerm}}```",
+    "messageClientPerm": "> Nie mam wystarczających uprawnień do wykonania polecenia: ```{{command.clientPerm}}```",
+
+    "indexCommandPrefix": "Prefiks",
+    "indexGetAllFooter": "Aby zobaczyć opis poleceń i sposób użycia: help [poleceń]",
+    "indexGetAllReply": "Menu poleceń zostało wysłane do Twojego PM",
+    "indexGetCMDInfo": "Informacje o poleceń **{{input.toLowerCase()}}** nie znaleziono.",
+    "indexGetCMDName": "**Nazwa poleceń**",
+    "indexGetCMDAliases": "**Skróty**",
+    "indexGetCMDDescription": "**Opis**",
+    "indexGetCMDUsage": "**Użycie**",
+    "indexGetCMDFooter": "Składnia: <> = wymagane, [] = opcjonalne"
+}

@@ -37,7 +37,9 @@ permission.command(client, {
     botOwner: ["botOwnerID"], //bot author id
     commands: "commands", //path to the commands folder, commands must be stored in one of the subfolders of this folder
     botPrefix: ["!", "*", ">"], //bot prefix
+    commandDM: false, //true|false - on|off using commands in bot DM
     commandHelp: true, //true|false - on|off command help
+    commandHelpDM: true, //true|false - on|off DM command help
     commandPrefix: true //true|false - on|off command prefix
     language: en_EN // language setting
 });
@@ -66,8 +68,11 @@ module.exports = {
 ### Language
 
 ```sh
-Русский: language: ru_RU
-English: language: en_EN
+Русский:     language: ru_RU
+English:     language: en_EN
+Українська:  language: uk_UK
+Белорусский: language: be_BE
+Polski:      language: pl_PL
 ```
 
 ### Links

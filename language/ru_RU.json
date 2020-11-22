@@ -4,7 +4,7 @@
 
     "indexCommandPrefix": "Префикс",
     "indexGetAllFooter": "Чтобы увидеть описание команд и тип использования: help [комманда]",
-    "indexGetAllReply": "Меню комманд отправлено вам в ЛС",
+    "indexGetAllReply": "Меню команд отправлено вам в ЛС",
     "indexGetCMDInfo": "Информации о команде **{{input.toLowerCase()}}** не найдено.",
     "indexGetCMDName": "**Название команды**",
     "indexGetCMDAliases": "**Алиасы**",

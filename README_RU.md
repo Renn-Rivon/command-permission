@@ -37,7 +37,9 @@ permission.command(client, {
     botOwner: ["botOwnerID"], //id автора бота
     commands: "commands", //Путь к папке commands, комманды должны хранится в одной из подпапок этой папки 
     botPrefix: ["!", "*", ">"], //Префиксы бота
+    commandDM: false, //true|false - включить|выключить использование комманд в ЛС бота
     commandHelp: true, //true|false - включить|выключить команду help
+    commandHelpDM: true, //true|false - включить|выключить отправление help в ЛС
     commandPrefix: true //true|false - включить|выключить команду prefix
     language: ru_RU //настройка языка
 });
@@ -66,8 +68,12 @@ module.exports = {
 ### Язык
 
 ```sh
-Русский: language: ru_RU
-English: language: en_EN
+Русский:     language: ru_RU
+English:     language: en_EN
+Українська:  language: uk_UK
+Белорусский: language: be_BE
+Polski:      language: pl_PL
+
 ```
 
 ### Ссылки
