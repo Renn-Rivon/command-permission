@@ -41,7 +41,7 @@ permission.command(client, {
     commandHelp: true, //true|false - on|off command help
     commandHelpDM: true, //true|false - on|off DM command help
     commandPrefix: true //true|false - on|off command prefix
-    language: en_EN // language setting
+    language: "en_EN" // language setting
 });
 
 client.login("Bot Token");
@@ -68,11 +68,11 @@ module.exports = {
 ### Language
 
 ```sh
-Русский:     language: ru_RU
-English:     language: en_EN
-Українська:  language: uk_UK
-Белорусский: language: be_BE
-Polski:      language: pl_PL
+Русский:     language: "ru_RU"
+English:     language: "en_EN"
+Українська:  language: "uk_UK"
+Белорусский: language: "be_BE"
+Polski:      language: "pl_PL"
 ```
 
 ### Links

@@ -41,7 +41,7 @@ permission.command(client, {
     commandHelp: true, //true|false - включить|выключить команду help
     commandHelpDM: true, //true|false - включить|выключить отправление help в ЛС
     commandPrefix: true //true|false - включить|выключить команду prefix
-    language: ru_RU //настройка языка
+    language: "ru_RU" //настройка языка
 });
 
 client.login("Bot Token");
@@ -68,11 +68,11 @@ module.exports = {
 ### Язык
 
 ```sh
-Русский:     language: ru_RU
-English:     language: en_EN
-Українська:  language: uk_UK
-Белорусский: language: be_BE
-Polski:      language: pl_PL
+Русский:     language: "ru_RU"
+English:     language: "en_EN"
+Українська:  language: "uk_UK"
+Белорусский: language: "be_BE"
+Polski:      language: "pl_PL"
 
 ```
 
